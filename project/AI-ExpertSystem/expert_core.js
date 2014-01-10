@@ -1,166 +1,4 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<style>
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote {
-    margin: 0;
-    padding: 0;
-}
-body {
-    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
-    font-size: 13px;
-    line-height: 18px;
-    color: #737373;
-    background-color: white;
-    margin: 10px 13px 10px 13px;
-}
-table {
-	margin: 10px 0 15px 0;
-	border-collapse: collapse;
-}
-td,th {	
-	border: 1px solid #ddd;
-	padding: 3px 10px;
-}
-th {
-	padding: 5px 10px;	
-}
 
-a {
-    color: #0069d6;
-}
-a:hover {
-    color: #0050a3;
-    text-decoration: none;
-}
-a img {
-    border: none;
-}
-p {
-    margin-bottom: 9px;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #404040;
-    line-height: 36px;
-}
-h1 {
-    margin-bottom: 18px;
-    font-size: 30px;
-}
-h2 {
-    font-size: 24px;
-}
-h3 {
-    font-size: 18px;
-}
-h4 {
-    font-size: 16px;
-}
-h5 {
-    font-size: 14px;
-}
-h6 {
-    font-size: 13px;
-}
-hr {
-    margin: 0 0 19px;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-}
-blockquote {
-    padding: 13px 13px 21px 15px;
-    margin-bottom: 18px;
-    font-family:georgia,serif;
-    font-style: italic;
-}
-blockquote:before {
-    content:"\201C";
-    font-size:40px;
-    margin-left:-10px;
-    font-family:georgia,serif;
-    color:#eee;
-}
-blockquote p {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 18px;
-    margin-bottom: 0;
-    font-style: italic;
-}
-code, pre {
-    font-family: Monaco, Andale Mono, Courier New, monospace;
-}
-code {
-    background-color: #fee9cc;
-    color: rgba(0, 0, 0, 0.75);
-    padding: 1px 3px;
-    font-size: 12px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-pre {
-    display: block;
-    padding: 14px;
-    margin: 0 0 18px;
-    line-height: 16px;
-    font-size: 11px;
-    border: 1px solid #d9d9d9;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-pre code {
-    background-color: #fff;
-    color:#737373;
-    font-size: 11px;
-    padding: 0;
-}
-sup {
-    font-size: 0.83em;
-    vertical-align: super;
-    line-height: 0;
-}
-* {
-	-webkit-print-color-adjust: exact;
-}
-@media screen and (min-width: 914px) {
-    body {
-        width: 854px;
-        margin:10px auto;
-    }
-}
-@media print {
-	body,code,pre code,h1,h2,h3,h4,h5,h6 {
-		color: black;
-	}
-	table, pre {
-		page-break-inside: avoid;
-	}
-}
-</style>
-<title>几何问题机械证明专家系统内核源代码</title>
-
-</head>
-<body>
-<h1>几何问题机械证明专家系统内核源代码</h1>
-
-<hr />
-<a href="./expert_core.js">源代码点击下载</a>
-<pre><code>
 /**
  * @date 2014.1.11
  * @author  Leo Lou
@@ -223,7 +61,7 @@ var expertSystem = function() {
 
     this.factsDB = {
         pointClass:         [
-
+            
         ],
         segmentClass:       {
 
@@ -261,7 +99,7 @@ var expertSystem = function() {
             circleClass: []
         };     
 
-        for(var i = 0; i &lt; factslist.length; i++) {
+        for(var i = 0; i < factslist.length; i++) {
             if(predicateValidator(factslist[i])){
                 var pred = predicateParser(factslist[i]);
                 switch(pred.name){
@@ -271,12 +109,12 @@ var expertSystem = function() {
                     case 'angle': case 'angle_90': factsDB.angleClass.push(pred); break;
                     case 'triangle': case 'triangle_90': case 'iso_triangle': case 'equil_triangle': case 'iso_triangle_90': factsDB.triangleClass.push(pred); break;
                     case 'rectangle' : factsDB.rectangleClass.push(pred); break;
-
+                    
                     default: break;
                 }
             }
         };
-
+        
         // console.log(factsDB);
         // for(var obj in factsDB){
         //     console.log(obj);
@@ -304,9 +142,9 @@ var expertSystem = function() {
     this.readFacts = function() {
         this.factsDB = parseInputFacts(this.demoFacts);
         // console.log(this.factsDB);
-
+    
     };
-
+    
     /**
      * [forwardReasoning the forward reasoning algorithm]
      * @param  {[string]} target, the form same as predicate
@@ -318,11 +156,11 @@ var expertSystem = function() {
             if(this.rulesDB[c] != false){
                 // console.log(c);
                 // console.log(this.rulesDB[c]);
-                for (var i = 0; i &lt; this.rulesDB[c].length; i++) {
+                for (var i = 0; i < this.rulesDB[c].length; i++) {
                     var rule = this.rulesDB[c][i];
                     // console.log(rule.premise);
                     var flag = true;
-                    for(var j = 0; j &lt; rule.premise.length; j++) {
+                    for(var j = 0; j < rule.premise.length; j++) {
                         if((rule.premise[j] in this.inputFacts)) {
                             console.log(rule.premise[j]);
                             flag = false;
@@ -357,11 +195,11 @@ var expertSystem = function() {
             if(this.rulesDB[c] != false){
                 // console.log(c);
                 // console.log(this.rulesDB[c]);
-                for (var i = 0; i &lt; this.rulesDB[c].length; i++) {
+                for (var i = 0; i < this.rulesDB[c].length; i++) {
                     var rule = this.rulesDB[c][i];
                     // console.log(rule.premise);
                     var flag = true;
-                    for(var j = 0; j &lt; rule.premise.length; j++) {
+                    for(var j = 0; j < rule.premise.length; j++) {
                         if((rule.premise[j] in this.inputFacts)) {
                             console.log(rule.premise[j]);
                             flag = false;
@@ -381,28 +219,28 @@ var expertSystem = function() {
             if(this.rulesDB[c] != false){
                 // console.log(c);
                 // console.log(this.rulesDB[c]);
-                for (var i = 0; i &lt; this.rulesDB[c].length; i++) {
+                for (var i = 0; i < this.rulesDB[c].length; i++) {
                     var rule = this.rulesDB[c][i];
                     // console.log(rule.premise);
                     var flag = true;
-                    for(var j = 0; j &lt; rule.premise.length; j++) {
+                    for(var j = 0; j < rule.premise.length; j++) {
                         if((rule.premise[j] in this.inputFacts)) {
                             console.log(rule.premise[j]);
                             flag = false;
                             break;
                         }
                     };  // find the matched facts,update the facts
-
+                   
                 };
                 if(target in this.inputFacts) {
                     return true;
                 }
-
+               
             }
-
+                   
                 }
             }
-
+        
     };
 };
 
@@ -415,7 +253,7 @@ function predicateParser(pred) {
         var pred = pred.substr(1, pred.length -2 );
         var temp = pred.split(' ');
         var varlist = [];
-        for(var i = 0; i &lt; temp.length; i++) {
+        for(var i = 0; i < temp.length; i++) {
             if(temp[i] != ''){
                 varlist.push(temp[i]);
             }
@@ -424,12 +262,12 @@ function predicateParser(pred) {
         pred = {};
         pred.name = varlist[0];
         pred.points = [];
-        for(var i = 1; i &lt; varlist.length; i++) {
+        for(var i = 1; i < varlist.length; i++) {
             if(varlist[i].length === 1){
                 pred.points.push(varlist[i]);
             }
             else{
-                for(var j = 0; j &lt; varlist[i].length; j++) {
+                for(var j = 0; j < varlist[i].length; j++) {
                     pred.points.push(varlist[i][j]);
                 }
             }
@@ -464,6 +302,3 @@ if(DEBUG) {
 var es = new expertSystem();
 es.readFacts();
 es.forwardReasoning('(parallel DE BC)');
-</code></pre>
-</body>
-</html>
