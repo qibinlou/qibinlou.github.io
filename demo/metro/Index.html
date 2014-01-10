@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/Metro_desktop.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+    
+	function getmytime()
+		{
+			var date = new Date();
+			var hour = date.getHours();
+			if( hour < 10 ) hour = "0" + hour;
+			
+		    var minutes = date.getMinutes();
+		    if( minutes < 10 ) minutes = "0" + minutes;
+		    var seconds = date.getSeconds();
+		    if( seconds < 10 ) seconds = "0" + seconds;
+		    // alert( hour+" :" + minutes +":" + seconds);
+		    document.getElementById("clock").innerText = hour+":"+minutes+":"+seconds;
+
+		};
+
+	
+
+	setInterval("getmytime()",1000);
+	var week = new Array( "天","一","二","三","四","五","六");
+
+	$(document).ready( function () {
+
+		document.getElementById("mydate").innerText = new Date().getMonth()+"月"+new Date().getDate()+"日  星期"+week[new Date().getDay()];
+
+		$("#Metro").click( function() {
+			// alert("ok");
+			$(this).slideUp("fast");
+
+		});
+
+		$(window).keydown( function() {
+			// alert("ok");
+			$("#Metro").slideDown("fast");
+
+		});
+		$("#inforbar img").mouseover( function(){
+			this.style.border="1px solid white";
+		})
+		$("#inforbar img").mouseout( function(){
+			this.style.border="";
+		})
+
+	
+
+
+		
+
+		
+
+	});
+</script>
+
+</head>
+
+<body>
+<div id="Metro">
+	<div id="time">
+		<pre id="clock"></pre>
+		<pre id="mydate"></pre>
+		<div id="inforbar">
+			<a href="#"><img src="images/ico1.ico" /></a>
+			<a href="#"><img src="images/ico2.ico" /></a>
+			<a href="#"><img src="images/ico3.ico" /></a>
+			<a href="#"><img src="images/ico4.ico" /></a>
+			<a href="#"><img src="images/ico5.ico" /></a>
+			<a href="#"><img src="images/ico6.ico" /></a>
+			<a href="#"><img src="images/ico7.ico" /></a>
+			<a href="#"><img src="images/ico8.ico" /></a>
+			<a href="#"><img src="images/ico9.ico" /></a>
+
+			
+	    </div>
+	
+	</div>	
+</div>
+
+
+
+</body>						
+
+
+</html>

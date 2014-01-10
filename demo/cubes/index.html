@@ -1,0 +1,253 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>顾神巨强！</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="3dtransforms.js"></script>
+<style type="text/css">
+
+  body{
+    margin: 0;
+    background-color: #e3e3e3;
+    overflow: hidden;
+  }
+	#experiment {
+      -webkit-perspective: 1800;
+      -webkit-perspective-origin: 50% 200px;
+
+      -moz-perspective: 1800;
+      -moz-perspective-origin: 50% 200px;
+
+      -o-perspective: 1800;
+      -o-perspective-origin: 50% 200px;
+
+      -ms-perspective: 1800;
+      -ms-perspective-origin: 50% 200px;
+
+      perspective: 1800;
+      perspective-origin: 50% 200px;
+
+    }
+   	 #cube {
+      position: relative;
+      margin: 13%  auto;
+      height: 400px;
+      width: 400px;
+      -webkit-transition: -webkit-transform 2s ease;
+      -webkit-transform-style: preserve-3d;
+
+      -moz-transition: -webkit-transform 2s ease;
+      -moz-transform-style: preserve-3d;
+
+      -o-transition: -webkit-transform 2s ease;
+      -o-transform-style: preserve-3d;
+
+    }
+
+    .side {
+      position: absolute;
+      height: 360px;
+      width: 360px;
+      padding: 20px;
+      color: white;
+      background-color: rgba(50, 50, 50, 0.7);
+    }
+
+    .face{
+      position: absolute;
+     /* padding: 20px;
+      height: 360px;
+      width: 760px;
+      background-color: rgba(150, 150, 150, 0.7);*/
+      display: block;
+      border-style: solid;
+      border-width: 0 200px 346.41016px 200px;
+      /*border-color: transparent red green teal;*/
+      border-color: transparent transparent transparent transparent;
+    }
+    .face:after{
+      position: absolute;
+      /*content: '';*/
+      text-align: justify;
+      top: 200px;
+      /*left: 100px;*/
+      font-size: 4em;
+      /*background-color: red;*/
+      color: white;
+
+    }
+    .one{
+      border-bottom-color: rgba(45,45,90,0.93);
+
+    }
+    .two{
+        border-bottom-color: rgba(145,45,90,0.93);    
+      
+    }
+    .three{
+      border-bottom-color: rgba(39,109,41,0.93);
+      
+    }
+    .four{
+      border-bottom-color: rgba(155,132,15,0.93);
+      
+    }
+    .one:after{
+      content: '顾';
+    }
+    .two:after{
+      content: '神';
+    }
+    .three:after{
+      content: '巨';
+    }
+    .four:after{
+      content: '强';
+    }
+
+     #cube .one  {
+      -webkit-transform:rotateY(180deg);
+      -moz-transform:rotateY(180deg);
+      -o-transform:rotateY(180deg);
+      /*-webkit-transform: rotateX(90deg) translateZ(200px);*/
+
+    }
+
+    #cube .two {
+      -webkit-transform-origin:center bottom;
+      -webkit-transform: rotate(120deg) translate(-100px,173.20508075px) rotateX(-70.52877936551deg);
+
+      -moz-transform-origin:center bottom;
+      -moz-transform: rotate(120deg) translate(-100px,173.20508075px) rotateX(-70.52877936551deg);
+
+      -o-transform-origin:center bottom;
+      -o-transform: rotate(120deg) translate(-100px,173.20508075px) rotateX(-70.52877936551deg);
+       /*-webkit-transform:rotateX(54.7356103174deg);*/
+
+    }
+
+    #cube .three {
+ -webkit-transform-origin:center bottom;
+      -webkit-transform: rotate(-120deg) translate(100px,173.20508075px) rotateX(-70.52877936551deg);
+
+      -moz-transform-origin:center bottom;
+      -moz-transform: rotate(-120deg) translate(100px,173.20508075px) rotateX(-70.52877936551deg);
+
+      -o-transform-origin:center bottom;
+      -o-transform: rotate(-120deg) translate(100px,173.20508075px) rotateX(-70.52877936551deg);
+
+    }
+
+    #cube .four {
+       -webkit-transform-origin:center bottom;
+      -webkit-transform: rotateX(-70.52877936551deg);
+
+      -moz-transform-origin:center bottom;
+      -moz-transform: rotateX(-70.52877936551deg);
+
+      -o-transform-origin:center bottom;
+      -o-transform: rotateX(-70.52877936551deg);
+
+    }
+
+</style>
+</head>
+<body>
+	<div id="experiment">
+        <div id="cube">
+                <div class="face one">
+                       
+                </div>
+                 <div class="face two">
+                      
+                </div>
+          
+                <div class="face three">
+                </div>
+                <div class="face four">
+                </div>
+               
+        </div>
+</div>
+
+<script type="text/javascript">
+// var xAngle = 0, yAngle = 0;
+//         document.addEventListener('keydown', function(e)
+//         {
+//         		// alert(e.keyCode);
+//                 switch(e.keyCode)
+//                 {
+
+//                         case 37: // left
+//                                 yAngle -= 90;
+//                                 break;
+
+//                         case 38: // up
+//                                 xAngle += 90;
+//                                 break;
+
+//                         case 39: // right
+//                                 yAngle += 90;
+//                                 break;
+
+//                         case 40: // down
+//                                 xAngle -= 90;
+//                                 break;
+//                 };
+
+//                 $('cube').style.webkitTransform = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+//         }, false);
+
+var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
+    prop,
+    el = document.createElement('div');
+
+for(var i = 0, l = props.length; i < l; i++) {
+    if(typeof el.style[props[i]] !== "undefined") {
+        prop = props[i];
+        break;
+    }
+}
+
+var xAngle = 0, yAngle = 0;
+$('body').keydown(function(evt) {
+
+    // alert(evt.keyCode);
+
+    //  minus :189   plus:187  
+    switch(evt.keyCode) {
+        case 37: // left
+            yAngle -= 90;
+            break;
+
+        case 38: // up
+            xAngle += 90;
+            break;
+
+        case 39: // right
+            yAngle += 90;
+            break;
+
+        case 40: // down
+            xAngle -= 90;
+            break;
+        case 189:
+            var temp = $("#experiment").css("-webkit-perspective");
+            temp = parseInt(temp.substr(0,temp.length-2));
+            if( temp > 100 ) temp -= 100;
+            $("#experiment").css("-webkit-perspective",temp ); 
+            break;
+        case 187:
+            var temp = $("#experiment").css("-webkit-perspective");
+              temp = parseInt(temp.substr(0,temp.length-2));
+            if( temp < 10000 ) temp += 100;
+            $("#experiment").css("-webkit-perspective",temp ); 
+            break;
+          
+    };
+    document.getElementById('cube').style[prop] = "rotateX("+xAngle+"deg) rotateY("+yAngle+"deg)";
+ });
+</script>
+
+</body>
+</html>

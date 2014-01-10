@@ -1,0 +1,390 @@
+﻿<html>
+<head>
+	<title>Greedy Snake</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div id="snake">
+	<canvas id="myCanvas" width="500" height="500">I'm Sorry!</canvas>
+	</div>
+	<div id="scores">
+		<h2 >SCORES:<span id="currentscore">0</span></h2>
+		<h2 >BEST:<span id="bestscore"></span></h2>
+		<h2>Time:<span id="time"></span></h2>
+	</div>
+
+	<div id="control">
+		<ul>
+			<li>
+				<button id="nodir"></button>
+			   <button id="up">Up</button>
+		       <button id="nodir"></button>
+			</li>
+			
+		     <li>
+		     	<button id="right">Left</button>
+		     <button id="down">Down</button>
+		     <button id="left">Right</button>
+		     </li>
+	    </ul>
+	</div>
+	<p id="Pos"></p>
+
+
+	<script type="text/javascript">
+	    var canvas = document.getElementById('myCanvas');
+	    var context = canvas.getContext('2d');
+
+	   var pre_row=-1 ,pre_col=-1;
+
+	   var path = new Array(24);
+	   for( var i = 0; i< 25; ++i)
+	   	 path[i] = new Array(24);
+
+	   	     
+
+	   
+	   function init_path(){
+           var i,j;
+           for( i = 0; i < path.length; ++i )
+           	 for( j = 0; j < path[i].length; ++j)
+           	 	path[i][j] = 0;
+	   }
+
+	   init_path();
+
+       //alert(path[2].length);
+
+       // var test=[[1,1]];
+       // var test2=[1,2];
+       // alert(test[0]);
+       // alert(test2);
+       // alert(test[0][0] == test2[0] && test[0][1]==test2[1]);
+
+
+	    function paint () {
+	    	var i, j;
+	    	for( i = 0 ; i <= 500; i += 25)
+	    		for( j = 0; j <= 500; j += 25)
+	    			context.fillRect(i,j,24,24);
+	    }
+	    function change_color(posX,posY){
+	    	var row = parseInt(posY / 25);
+	    	var col = parseInt(posX / 25);
+	    	if( row == pre_row && col == pre_col) return;
+	    //	alert(row+","+col);
+	        var x1 = pre_col * 25;
+	    	var y1 = pre_row * 25;
+	    	context.save();
+	    	context.beginPath();
+	    	context.fillStyle="black";
+	    	context.fillRect(x1,y1,24,24);
+	    	context.restore();
+
+	    	var x2 = col * 25;
+	    	var y2 = row * 25;
+	    	context.save();
+	    	context.beginPath();
+	    	context.fillStyle="white";
+	    	context.fillRect(x2,y2,24,24);
+	    	context.restore();
+
+	    	pre_row = row;
+	    	pre_col = col;
+
+	    }
+	   // paint();
+
+	    function Snake()
+	    {
+	    	this.SnakeBody = [ [12,12] ];
+	    	this.direction = 0;
+	    	this.speed = 300;
+	    	this.food = [parseInt(Math.random()*20),parseInt(Math.random()*20)];
+	    	this.scores = 0;
+	    	this.stop = false;
+	    	this.date ;
+
+
+	    	this.setpos = function(){
+	    		var i,j;
+	    		for( i = 0; i < this.SnakeBody.length; ++i)
+	    			path[this.SnakeBody[i][0]][this.SnakeBody[i][1]] = 1;
+	    		path[this.food[0]][this.food[1]] = 2;
+	    	}
+
+	    	this.move = function(){
+
+	    		
+	    		if( this.SnakeBody.length > 1 ){
+	    			var dir;
+	    				if( this.SnakeBody[0][0] == this.SnakeBody[1][0] )
+	    					if( this.SnakeBody[0][1] > this.SnakeBody[1][1] )
+	    						dir = 1;
+	    					else 
+	    						dir = 3;
+	    				else if( this.SnakeBody[0][0] > this.SnakeBody[1][0] )
+	    					    dir = 2;
+	    					 else 
+	    					 	dir = 0;
+	    				if( Math.abs(this.SnakeBody[0][0] - this.SnakeBody[1][0]) +  Math.abs(this.SnakeBody[0][1] - this.SnakeBody[1][1]) > 2)
+	    				     dir = -10; 
+
+	    			if( Math.abs(this.direction - dir) == 2 )
+	    				this.direction = dir;
+	    			
+	    				
+	    		}
+
+
+	    		var i;
+	    		path[this.SnakeBody[this.SnakeBody.length-1][0]][this.SnakeBody[this.SnakeBody.length-1][1]] = 0;
+	    		for( i = this.SnakeBody.length -1; i > 0; --i){
+	    			this.SnakeBody[i][0] = this.SnakeBody[i-1][0];
+	    			this.SnakeBody[i][1] = this.SnakeBody[i-1][1];
+	    		}
+	    		switch( this.direction )
+	    		{
+	    			case 0: this.SnakeBody[0][0] -= 1; break;
+	    			case 1: this.SnakeBody[0][1] += 1; break;
+	    			case 2: this.SnakeBody[0][0] += 1; break;
+	    			case 3: this.SnakeBody[0][1] -= 1; break;
+	    			default: break;
+	    		}
+
+	    		if( this.SnakeBody[0][0] < 0 )
+	    			this.SnakeBody[0][0] = 19;
+	    		if( this.SnakeBody[0][0] > 19 )
+	    			this.SnakeBody[0][0] = 0;
+	    		if( this.SnakeBody[0][1] < 0 )
+	    			this.SnakeBody[0][1] = 19;
+	    		if( this.SnakeBody[0][1] > 19 )
+	    			this.SnakeBody[0][1] = 0;
+
+	    	}
+
+	    	this.setspeed = function(x){
+	    		if( x > 0 )
+	    			this.speed = x;
+	    		else this.speed = 50;
+	    	}
+
+
+        
+	    	this.meetfood = function(snake){
+	    		if( this.food[0] == this.SnakeBody[0][0] && this.food[1] == this.SnakeBody[0][1]){
+	    		    this.scores++;
+	    		    // if( this.scores%5 == 0){
+		    		   //  if( this.scores == 5)
+		    		   //     this.setspeed( 200 ); 
+		    		   //  else if( this.scores == 10)
+		    		   //     this.setspeed( 100 );
+		    		   //  else if( this.scores == 15)
+		    		   //     this.setspeed( 50 );
+		    		   //  else if( this.scores == 20)
+		    		   //     this.setspeed( 20 );
+		    		   this.setspeed(300-this.scores*10);
+		    		   t = clearInterval(t);
+		    		   t = setInterval("snake.run(snake)",this.speed);
+
+	    		    //}
+	    		    	// case 10： this.setspeed( 200 ); break;
+	    		    	// case 15： this.setspeed(this.speed - 300 ); break;
+	    		    	// case 20： this.setspeed(this.speed - 300 ); break;
+	    		    	// default: break;
+	    		   
+	    			this.food[0] = parseInt(Math.random()* 20);
+	    			this.food[1] = parseInt(Math.random()* 20);
+	    			//alert(this.food[0]+"  "+this.food[1]);
+	    			var length = this.SnakeBody.length;
+
+	    			if( length == 1)
+	    				switch( this.direction )
+	    			{
+	    				case 0: this.SnakeBody.push([this.SnakeBody[0][0]+1,this.SnakeBody[0][1]]); break;
+	    				case 1: this.SnakeBody.push([this.SnakeBody[0][0],this.SnakeBody[0][1]+1]); break;
+	    				case 2: this.SnakeBody.push([this.SnakeBody[0][0]-1,this.SnakeBody[0][1]]); break;
+	    				case 3: this.SnakeBody.push([this.SnakeBody[0][0],this.SnakeBody[0][1]-1]); break;
+	    				default:break;
+	    			}
+	    			else{
+	    				var dir;
+	    				if( this.SnakeBody[length-2][0] == this.SnakeBody[length-1][0] )
+	    					if( this.SnakeBody[length-2][1] > this.SnakeBody[length-1][1] )
+	    						dir = 1;
+	    					else 
+	    						dir = 3;
+	    				else if( this.SnakeBody[length-2][0] > this.SnakeBody[length-1][0] )
+	    					    dir = 2;
+	    					 else 
+	    					 	dir = 0;
+	    				switch(dir)
+	    				{
+	    				case 0: this.SnakeBody.push([this.SnakeBody[length-1][0]+1,this.SnakeBody[length-1][1]]);break;
+	    				case 1: this.SnakeBody.push([this.SnakeBody[length-1][0],this.SnakeBody[length-1][1]+1]); break;
+	    				case 2: this.SnakeBody.push([this.SnakeBody[length-1][0]-1,this.SnakeBody[length-1][1]]); break;
+	    				case 3: this.SnakeBody.push([this.SnakeBody[length-1][0],this.SnakeBody[length-1][1]-1]); break;
+	    				default:break;
+
+	    				}
+
+	    			} 
+
+	    		}
+
+	    		else return;
+	    	
+	    	}
+
+	    	this.repaint = function(){
+	    		context.clearRect(0,0,canvas.width,canvas.height);
+	    		//context.save();
+	    		context.beginPath();
+	    		var i, j;
+	    	    for( i = 0 ; i < 20; i += 1)
+	    		  for( j = 0; j < 20; j += 1)
+	    			 if( path[i][j] == 0 ){
+	    			 	context.fillStyle="white";
+	    			 	context.fillRect(i*25,j*25,24,24);
+	    			 }
+	    			 else if( path[i][j] == 1){
+	    			 	 var r = parseInt(Math.random()*256),g = parseInt(Math.random()*256),b = parseInt(Math.random()*256),alpha = parseInt(Math.random()*256);
+	    			 	context.fillStyle='rgba('+r+','+g+','+b+','+alpha+')';
+	    			 	context.fillRect(i*25,j*25,24,24);
+
+	    			 }
+	    		context.fillStyle="red";
+	    		context.fillRect(this.food[0]*25,this.food[1]*25,24,24);
+
+	    		context.fillStyle="black";
+	    		context.fillRect(this.SnakeBody[0][0]*25,this.SnakeBody[0][1]*25,24,24);
+	    		//context.closePath();
+
+	    		//context.restore();
+	    	}
+
+	    	this.crash = function(){
+	    		if( this.SnakeBody.length < 5) return false;
+	    		else{
+
+	    			for (var i = this.SnakeBody.length - 1; i >= 1; i--) {
+	    				if( this.SnakeBody[0][0] == this.SnakeBody[i][0] &&  this.SnakeBody[0][1] == this.SnakeBody[i][1] )
+	    					return true;
+					    			
+	    		    }
+	    		    return false;
+	    	     }	   		
+	    	}
+
+
+	    	
+
+	  
+
+	    	this.gameover = function(){
+                 clearInterval(t);
+	    		context.clearRect(0,0,canvas.width,canvas.height);
+	    	}
+
+	    	this.pause = function(){
+	    		if( this.stop)
+	    			this.stop = false;
+	    		else  this.stop = true;
+	    	}
+
+
+	    	this.run = function(snake){
+
+	    		if( !snake.stop){
+
+	    		this.move();
+	    		if( this.crash() ){
+	              clearInterval(t);
+	              if( !localStorage.bestscore )
+	              	  localStorage.bestscore = this.scores;
+	              else if( this.scores > localStorage.bestscore)
+	              	  localStorage.bestscore = this.scores;
+	             // alert(this.scores);
+	              return;
+	            }   
+	    		this.meetfood(snake);
+	    		$("#currentscore").html(this.scores);
+	    		$("#time").html( parseInt((new Date().getTime() - this.date)/1000 ));
+	           
+	    		this.setpos();
+	    		this.repaint();
+	    		//alert("ok");
+	    	}
+
+
+
+	    	}
+
+	    	this.start = function( snake){
+	    		 this.date = new Date().getTime();
+	    		 t = setInterval("snake.run(snake)",snake.speed);
+	    	}
+	    }
+
+	    var snake = new Snake();
+	    snake.start(snake);
+	  //  while( !snake.stop )
+	      //t = setInterval("snake.run()",snake.speed);
+	       //t =clearInterval(t);
+
+	      
+	   // aler("ok");
+	    
+  
+
+
+	$(document).ready(function(){
+
+		if( !localStorage.bestscore)
+			localStorage.bestscore = 0;
+		    document.getElementById('bestscore').innerHTML=localStorage.bestscore;
+
+
+          //      show my positiin 
+	    // $("#myCanvas").mousemove(function( e ){
+	    // 	var posX = e.pageX;
+	    // 	var posY = e.pageY;
+	    // 	$("#Pos").html(posX+"  "+posY);
+	    // 	//change_color(posX,posY);
+	    // })
+
+	    $(document).keydown(function(e){
+	    	//alert(e.which);
+	    	switch(e.which)
+	    	{
+	    		case 37: snake.direction = 0; break;
+	    		case 38: snake.direction = 3; break;
+	    		case 39: snake.direction = 2; break;
+	    		case 40: snake.direction = 1; break;
+                case 32: snake.pause(); break;
+	    		default:break;
+
+	    	}
+
+	    })
+
+	    $("#up").click(function(){
+	    	snake.direction = 3;
+	    })
+	    $("#right").click(function(){
+	    	snake.direction = 0;
+	    })
+	    $("#down").click(function(){
+	    	snake.direction = 1;
+	    })
+	    $("#left").click(function(){
+	    	snake.direction = 2;
+	    })
+
+	});
+
+	</script>
+</body>
+</html>

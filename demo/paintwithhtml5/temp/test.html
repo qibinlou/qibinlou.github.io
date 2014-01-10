@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <style type="text/css">
+    #resizable { width: 100px; height: 100px; background: silver; }
+  </style>
+ 
+<style type="text/css">
+.canvas{
+  display: block;
+  width: 250px;
+  height: 250px;
+  background-color: green;
+}
+
+.canvas2{
+   display: block;
+  width: 250px;
+  height: 250px;
+  background-color: teal;
+
+}
+</style>
+</head>
+<body style="font-size:62.5%;">
+<img src="../image/heart.png" id="heart">
+<img src="../image/heart.png" >
+
+<canvas width="1000" height="600" id="mycanvas"></canvas>
+<script type="text/javascript">
+    window.onload = function  () {
+        canvas = document.getElementById('mycanvas');
+        context = canvas.getContext('2d');
+        //context.fillRect(0,0,canvas.width,canvas.height);
+        
+        var heart = document.getElementById("heart");
+        heart.width = 20;
+       // alert(heart.height);
+
+        var littleheart = new Image();
+       // littleheart.style.width = "24px";
+        littleheart.width = 20;
+        //alert(littleheart.width);
+
+
+       // window.open(littleheart.src);
+        //window.open(heart.src);
+       // context.fillStyle = "yellow";
+       // context.strokeStyle = context.createPattern(heart,'repeat');
+       //  context.fillStyle = context.createPattern(heart,'repeat');
+      //   alert(context.fillStyle);
+        context.lineWidth = 48;
+        canvas.width = context.lineWidth;
+        canvas.height = 48;
+         canvas = document.getElementById('mycanvas');
+        context = canvas.getContext('2d');
+        context.lineWidth = 48;
+
+        context.beginPath();
+       //  context.moveTo(0,0);
+       //  context.lineTo(1000,500);
+       //  context.lineTo(500,1000);
+       // // context.lineTo(200,200);
+       //  context.lineTo(0,0);
+       context.fillRect(0,0,context.lineWidth,context.lineWidth);
+        context.closePath();
+        
+
+        var img = new Image();
+        img.src = canvas.toDataURL();
+       canvas.width = 1000;
+        canvas.height = 800;
+         canvas = document.getElementById('mycanvas');
+        context = canvas.getContext('2d');
+        context.lineWidth = 100;
+        context.strokeStyle = context.createPattern(img,'repeat');
+        context.beginPath();
+        context.moveTo(0,0);
+        context.lineTo(1000,500);
+        context.lineTo(500,1000);
+       // context.lineTo(200,200);
+        context.lineTo(0,0);
+        context.closePath();
+
+        //window.open(img.src);
+         context.stroke();
+         //context.fill();
+    }
+
+</script>
+
+
+</body>
+</html>

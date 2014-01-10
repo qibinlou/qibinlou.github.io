@@ -1,0 +1,58 @@
+#Metro{
+	display: block;
+	width:1366px;
+    height: 850px;
+	margin: auto;
+	overflow: hidden;
+	background-image: url(../images/bg1.jpg);
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	background-clip: rect(0px,500px,500px,0px);
+	
+	/*background-position: center;*/
+	/*background-size: 1000px;*/
+	/*background-color: red;*/
+	/*background-repeat: no-repeat;*/
+} 
+
+#time
+{
+	position: absolute;
+	top:260px;
+	left: 50px;
+	width: 650px;
+	height: 650px;
+	/*background-color: #e3e3e3;*/
+	padding: 10px; 
+}
+#Metro #time #clock{
+    display: block;
+	font-size: 100px;
+	color: white;
+	/*background-color: red;*/
+}
+
+#Metro #time #mydate{
+	display: block;
+	padding: 5px;
+	margin-top: -90px;
+	font-size: 30px;
+	color: white;
+	/*background-color: green;*/
+}
+
+#Metro #inforbar{
+	display: block;
+	padding: 2px;
+	/*width: 300px;*/
+	/*height: 50px;*/
+	margin-top: 0px;
+	background-color: black;
+	opacity: 0.6;
+}
+
+#inforbar img{
+	width: 28px;
+	margin: 3px;
+
+}

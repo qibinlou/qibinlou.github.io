@@ -1,0 +1,70 @@
+body{
+	background-image: url("../images/bg.png");
+}
+
+
+#snake{
+	/*display: block;
+
+	border: 2px grey solid;*/
+}
+#myCanvas{
+	border: 13px silver  solid;
+    border-radius: 20px;
+	margin-left: 25%;
+	margin-top: 2%;
+	float: left;
+}
+
+#scores{
+	margin-left: 50px;
+	margin-top: 2%;
+	width: 250px;
+	height: 150px;
+	background-color: teal;
+	border-radius: 10px;
+	float: left;
+	position: relative;
+}
+
+#scores h2{
+	padding: 1px 10px;
+    width: 300px;
+    display: block;
+ 	color: white;
+}
+
+#scores h2 span{
+    color: white;
+	position:absolute;
+	left: 130px;
+	
+}
+
+#control
+{
+	float: left;
+	margin: 20px;
+	
+
+}
+
+#control button{
+	width: 100px;
+	height: 50px;
+	float: left;
+	margin: 10px;
+	display: inline-block;
+	border-radius: 15px;
+	background-color: green;
+}
+
+#control ul{
+	list-style: none; 
+}
+
+#nodir{
+	/*display: none;*/
+	visibility: hidden;
+
+}

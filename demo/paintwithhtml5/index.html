@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="Bookmark"  href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/style.css" >
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/painter.js"></script>
+
+	<title>PAINTER WITH HTML5</title>
+
+</head>
+<body>
+
+	<header id="ToolBar">
+
+		<li ><img src="image/back.png" id="Back" title="Back"></li>
+		<li ><img src="image/next.png" id="Forward" title="Next"></li>
+		<li ><img src="image/save.png" id="Save" title="Save"></li>
+		<li ><img src="image/settings.png" id="Settings" title="Settings"></li>
+		<li ><img src="image/camera.png" id="Camera" title="Camera"></li>
+		<li ><img src="image/Bin.png" id="Clear" title="Clear"></li>
+		<li id="pencil"><img src="image/Paint.ico" width="48" title="Paint"></li>
+		<li id="pourer"><img src="image/pour.jpg" width="48" title="pour"></li>
+		<li id="eraser"><img src="image/eraser.png" width="48" title="Eraser"></li>
+		<li id="text"><img src="image/text.jpg" width="48" title="Text"></li>
+		<!-- <li id="picker"><img src="image/colorpicker.png" width="48"></li> -->
+		<li id="brush"><img src="image/brush.jpg" width="48" title="Brush"></li>
+		<!-- <li ><img src="image/Help.png" id="HelpInfo" title="Help"></li> -->
+		<!-- <li id="shapes"><p>shapes</p></li> -->
+		
+		
+		
+		<li id="ColorBoard">
+			<li id="CurrentColor"><span title="Current Color"></span></li>
+			<li>
+				<table border="1" id="ColorTable">
+					<tr>
+						<td style="background-color:aqua "  title="aqua"></td>
+						<td style="background-color:black "  title="black"></td>
+						<td style="background-color: blue"  title="blue"></td>
+						<td style="background-color:fuchsia "  title="fuchsia"></td>
+						<td style="background-color:gray "  title="gray"></td>
+						<td style="background-color:green "  title="green"></td>
+					</tr>
+					
+						<td style="background-color: lime"  title="lime"></td>
+						<td style="background-color: maroon"  title="maroon"></td>
+						<td style="background-color:navy "  title="navy"></td>
+						<td style="background-color: olive"  title="olive"></td>
+						<td style="background-color:purple "  title="purple"></td>
+						<td style="background-color: red"  title="red"></td>
+					</tr>
+				
+						<td style="background-color: silver"  title="silver"></td>
+						<td style="background-color: teal"  title="teal"></td>
+						<td style="background-color: white"  title="white"></td>
+						<td style="background-color:yellow "  title="yellow"></td>
+						<td style="background-color: "  title=""></td>
+						<td style="background-color: "  title=""></td>
+					</tr>
+					
+				</table>
+			</li>
+			<li><input type="color" id="ColorPicker" title="Choose the color you want!"></li>
+		</li>
+		<li ><img src="image/FullScreen.png" id="FullScreen" title="Switch to full screen mode"></li>
+		<li ><img src="image/Pin.png" id="Pin" title="Hide toolbar"></li>
+	</header>
+
+	<!-- Control Panel -->
+	<div id="Setting"  >
+		<header><h2>Settings</h2></header>
+		<section>
+			<li><label><b>Text</b><input  type="text" placeholder="Enter the words!" id="words"></label></li>
+			<li><label><b>Font</b>
+				<select>
+					<option>宋体</option>
+					<option>黑体</option>
+					<option>Arial, Helvetica, sans-serif</option>
+					<option>'Arial Black', Gadget, sans-serif</option>
+					<option>Georgia, serif</option>
+					<option>'MS Serif', 'New York', sans-serif</option>
+					<option>'Times New Roman', Times, serif</option>
+				</select>
+				</label>
+			</li>
+			<li>
+				<label id="fontsize" ><b>Font Size</b>
+					<input type="range" min="5" max="500" value="200">
+					<input type="text" value="200">
+				</label>
+			</li>
+			<li><label id="fontstyle"><b>Paint Style:</b>
+					Fill<input type="checkbox" name="fill" value="Fill">
+					Stroke<input type="checkbox" name="stroke" value="Stroke" checked>
+					Italic<input type="checkbox" name="italic" value="italic">
+				</label>
+			</li>
+			<li>
+				<label id="linewidth"><b>Line Width</b>
+					<input type="range" min="1" max="200" value="5">
+					<input type="text" value="5">
+				</label>
+			</li>
+
+			<li><label><b>Brush Style</b>
+				<select id="brushstyle">
+					<option >line</option>
+					<option>jagged</option>
+					<option>square</option>
+					<option>circle</option>
+					<option>triangle</option>
+					<option>Random color</option>
+					<!-- <option>pattern</option> -->
+				</select>
+				</label>
+			<!-- <li id="linewidth"><label><b>Width:<b><input type="range" name="linewidth" min="5" max="100" value="10"></label></li> -->
+		</section>
+	</div>
+
+	<div id="container" class="ui-widget-content" >
+		<canvas id="mycanvas"  ></canvas>
+		<span class="ResizeMarker" id="Marker_1" title="verticle resize"></span>
+		<span class="ResizeMarker" id="Marker_2" title="horizonal resize"></span>
+		<span class="ResizeMarker" id="Marker_3" title="resize and drag!"></span>
+	</div>
+
+
+	<img src="image/Pin.png" id="ShowToolBar" tilte="Show ToolBar" alt="Show ToolBar">
+    <div id="helper"></div>
+    <canvas id="helper_canvas" style="display:none"></canvas>
+    <div id="WebCamera" >
+    	<!-- <video id="Video" ></video> -->
+    	<footer>
+    		<button>ScreenShot</button>
+    		<button>Done</button>
+    	</footer>
+    </div>
+
+
+	<div style="display:none" name="SharebyRenRen">
+	 	
+	 	<input type="text" value="29706" size="10" id="appId" onchange="changeAppId(this.value);"></input>
+
+		<select id="urls" onchange="changeParams()">
+			<option value="feed" selected="selected">feed</option>
+			<option value="authorize">authorize</option>
+			<option value="authorize_http">authorize_http</option> 
+			<option value="request">request</option>
+			<option value=""></option>
+		</select>
+	 	<input type="text" value="" size="20" id="url" readonly="readonly"></input> 
+	 
+	 	<select id="display">
+			<option></option>
+			<option value="popup">popup</option>
+			<option value="iframe">iframe</option>
+			<option value="page">page</option>
+		</select> 
+	 
+		<select id="method">
+			<option></option>
+			<option value="get">get</option>
+			<option value="post">post</option>
+		</select>
+
+		<input type="text" value="" size="5" id="top"></input>
+		 <input type="text" value="" size="5" id="left"></input> 
+		 <input type="text" value="" size="5" id="width"></input>
+		 <input type="text" value="" size="5" id="height"></input>
+
+		<div>params：</div>
+		<textarea cols="100" rows="10" id="params"></textarea>
+	</div>
+
+
+
+	
+
+	<footer id = "foot">
+		<p id="Pos"><span>X</span><span id="Pos_X">0</span><span>Y</span><span id="Pos_Y">0</span></p>
+		<p style="color:white;text-align:center;" id="footinfo"><a href="http://www.louqibin.me" style="text-decoration:none; color:white;"><b>娄琦彬 </b> CopyRight@2013</a></p>
+    </footer>
+
+
+</body>
+</html>
