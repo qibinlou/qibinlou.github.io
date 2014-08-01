@@ -11,28 +11,38 @@
             button {
                 margin: 10px;
             }
+            textarea#title {
+                height: 60px;
+            }
+            #copyright{
+                position: absolute;
+                bottom: 0;
+                text-align: center;
+            }
         </style>
         <script type="text/javascript" src="WeixinApi.js"></script>
     </head>
     <body>
-        <p>这是一个测试页面！请直接分享到微信好友、朋友圈、腾讯微博看效果吧！</p>
-        <p>如果你是扫一扫过来的，可以复制连接，然后发给任何一个微信好友，再点击连接进入测试</p>
-        <p>
-            <button id="optionMenu">WeixinApi.hideOptionMenu</button>
-        </p>
-        <p>
-            <button id="toolbar">WeixinApi.hideToolbar</button>
-        </p>
-        <p>
-            <button id="networkType">WeixinApi.getNetworkType</button>
-        </p>
-        <p>
-            <button id="imagePreview">WeixinApi.imagePreview</button>
-        </p>
-        <p>
-            <button id="closeWindow">WeixinApi.closeWindow</button>
-        </p>
-        <h2>少年，点击右上角分享就可以了。。</h2>
+        <h2>微信游戏无聊外挂= 。=</h2>
+        <div id="setting">
+            <div>
+                <label>请填写链接地址：</label> <br>
+                <input type="text" id="link" placeholder="xxx.com"/>
+            </div>
+            <div>
+                <label>请填写分享内容：</label> <br>
+                <textarea id="title" placeholder="您要分享的内容"></textarea>
+                
+            </div>
+            <div>
+                <label>请填写链接图片地址：</label> <br>
+                <input type="text" id="imageurl" placeholder="http://xxx.jpg"/>
+            </div>
+            <h3 style="color:red;">填写完成后就可以点击右上角，分享到朋友圈吧。。</h3>
+
+            <div id="copyright">&copy; Leo Lou. 2014.</div>
+            
+        </div>
 
         <script type="text/javascript">
 
@@ -100,10 +110,10 @@
                 // 微信分享的数据
                 var wxData = {
                     "appId": "10086", // 服务号可以填写appId
-                    "imgUrl" : 'http://images.1758.com/images/wxicon.png',
-                    "link" : 'http://www.1758.com/hlmy/yanse2.htm',
-                    "desc" : '我闯过100关，击败250%的人！我是【孤独求色lv250】!不服来战!',
-                    "title" : '我闯过100关，击败250%的人！我是【孤独求色lv250】!不服来战!'
+                    "imgUrl" : document.getElementById('imageurl').value || 'http://www.onlinedown.net/bigsoftimg/androidimg/simg/530000/524640.png',
+                    "link" : document.getElementById('link').value || 'http://www.louqibin.me',
+                    "desc" : document.getElementById('title').value || '雅蠛蝶！放开那个姑娘！'
+                    "title" : document.getElementById('title').value || '雅蠛蝶！放开那个姑娘！'
                 };
 
                 // 分享的回调
