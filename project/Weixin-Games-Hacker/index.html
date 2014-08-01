@@ -15,7 +15,7 @@
                 height: 60px;
             }
             #copyright{
-                position: absolute;
+                position: fixed;
                 bottom: 0;
                 text-align: center;
             }
@@ -122,6 +122,8 @@
                     ready : function() {
                         // 你可以在这里对分享的数据进行重组
                         alert("准备分享");
+                        alert(wxData.imgUrl);
+                        alert(wxData.desc);
                     },
                     // 分享被用户自动取消
                     cancel : function(resp) {
