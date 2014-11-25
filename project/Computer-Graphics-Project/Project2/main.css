@@ -1,0 +1,58 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    background: #000;
+    width: 100%;
+    height: 100%;
+}
+
+#screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+    font-family: Segoe UI, Verdana, Arial, Sans-Serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+#screen canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    display: block;
+    z-index: 9999;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    font-family: cursive, serif;
+
+}
+
+div#footer {
+    position: fixed;
+    bottom: 0;
+    display: block;
+    z-index: 9999;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+}
+
+
+#footer a {
+    color: rgb(40, 233, 59);
+}
+
